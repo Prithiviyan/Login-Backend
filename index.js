@@ -64,14 +64,19 @@ app.post("/register", async (request, response) => {
   });
   if (user) {
     return response.send({ message: "AlreadyRegistered" });
-  } else {
-    var register = new Register({
-      Name: request.body.name,
-      Email: request.body.email,
-      Password: request.body.pass,
-      ConfirmPassword: request.body.conPass,
-    });
-    register.save();
+  } else{
+    try{
+      var register = new Register({
+        Name: request.body.name,
+        Email: request.body.email,
+        Password: request.body.pass,
+        ConfirmPassword: request.body.conPass,
+      });
+      register.save();
+    }
+    catch{
+      console.log("errror");
+    }
     response.send({
       message: "Registered Successfully!",
     });
